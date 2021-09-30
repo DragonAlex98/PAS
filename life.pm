@@ -1,19 +1,13 @@
 /* Risultati CSV */
 /* time unit;media;varianza;dev std */
-/* prima set param poi init */
-
-/* alberi che producono cibo e crescono */
-/* persone che tagliano alberi per creare assi per costruire case */
-/* persone che mangiano per riprodursi (solo se ci sono abbastanza case) */
-
-const trees = 100;       /* Initial number of trees */
-const lumberjacks = 25;  /* Initial number of lumberjacks */
-const farmers = 25;      /* Initial number of farmers */
+const trees = 30;        /* Initial number of trees */
+const lumberjacks = 10;  /* Initial number of lumberjacks */
+const farmers = 5;       /* Initial number of farmers */
 
 const produceSeedRate = 0.25;
 const produceAppleRate = 0.25;
-const lumberjackDeathRate = 0.1;
-const farmerDeathRate = 0.1;
+const lumberjackDeathRate = 0.01;
+const farmerDeathRate = 0.01;
 
 species T;              /* tree */
 species W;              /* wood */
@@ -40,11 +34,11 @@ rule die_tree {
 }
 
 rule die_lumberjack {
-    [#A < (#L + #F)] L -[ lumberjackDeathRate ]-> D
+    [#A < (#L + #F)] L -[ #L * lumberjackDeathRate ]-> D
 }
 
 rule die_farmers {
-    [#A < (#L + #F)] F -[ farmerDeathRate ]-> D
+    [#A < (#L + #F)] F -[ #F * farmerDeathRate ]-> D
 }
 
 rule eat_lumberjack {
@@ -83,7 +77,8 @@ rule grow_to_lumberjack {
     BL -[ 0.5 ]-> L
 }
 
-system init = T<trees>|L<lumberjacks>|F<farmers>;
+param scale = 5;
+system init = T<trees*scale>|L<lumberjacks*scale>|F<farmers*scale>;
 
 /*param nprod = 5;
 
