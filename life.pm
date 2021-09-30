@@ -6,13 +6,13 @@
 /* persone che tagliano alberi per creare assi per costruire case */
 /* persone che mangiano per riprodursi (solo se ci sono abbastanza case) */
 
-const trees = 20;       /* Initial number of food */
-const lumberjacks = 5;  /* Initial number of lumberjacks */
-const farmers = 3;      /* Initial number of farmers */
+const trees = 100;       /* Initial number of trees */
+const lumberjacks = 25;  /* Initial number of lumberjacks */
+const farmers = 25;      /* Initial number of farmers */
 
 const produceSeedRate = 0.25;
 const produceFoodRate = 0.25;
-const lumberjackWithoutFoodDeathRate = 0.2;
+const lumberjackWithoutFoodDeathRate = 0.1;
 const farmerWithoutFoodDeathRate = 0.1;
 
 species T;              /* tree */
@@ -20,37 +20,43 @@ species W;              /* wood */
 species H;              /* house */
 species F;              /* food */
 species S;              /* seed */
-species B;              /* baby */
+species BL;             /* baby lumberjack */
+species BC;             /* baby contadino */
 species C;              /* contadino */
 species L;              /* lumberjack */
 species D;              /* dead */
+species CT;             /* cut trees */
 
 rule produce_seed {
-    T -[ produceSeedRate ]-> T|S<4>
+    T -[ produceSeedRate ]-> T|S<2>
 }
 
 rule produce_food {
-    T -[ produceFoodRate ]-> T|F<4>
+    T -[ produceFoodRate ]-> T|F<2>
+}
+
+rule die_tree {
+    [#T > #C] T -[ 1.0 ]-> CT
 }
 
 rule die_lumberjack {
-    [#F == 0] L -[ lumberjackWithoutFoodDeathRate ]-> D
+    [#F < (#L + #C)] L -[ lumberjackWithoutFoodDeathRate ]-> D
 }
 
 rule eat_lumberjack {
-    L|F -[ 0.1 ]-> L
+    L|F -[ #L * %F ]-> L
 }
 
 rule eat_farmer {
-    C|F -[ 0.1 ]-> C
+    C|F -[ #C * %F ]-> C
 }
 
 rule die_farmers {
-    [#F == 0] C -[ farmerWithoutFoodDeathRate ]-> D
+    [#F < (#L + #C)] C -[ farmerWithoutFoodDeathRate ]-> D
 }
 
 rule cut_tree {
-    L|T -[ 1.0 ]-> L|W<2>
+    L|T -[ #L * %T ]-> L|W<2>|CT
 }
 
 rule build_house {
@@ -58,23 +64,23 @@ rule build_house {
 }
 
 rule plant_tree {
-    C|S -[ 1.0 ]-> C|T
+    C|S -[ #C * %S ]-> C|T
 }
 
-rule new_person {
-    L|L|F|H -[ 1.0 ]-> L|L|B
+rule new_lumberjack {
+    L<2>|F|H -[ #L * %F ]-> L<2>|BL
 }
 
-rule new_person_2 {
-    C|C|F|H -[ 1.0 ]-> C|C|B
+rule new_farmer {
+    C<2>|F|H -[ #C * %F ]-> C<2>|BC
 }
 
 rule grow_to_farmer {
-    B -[ 0.5 ]-> C
+    BC -[ 0.5 ]-> C
 }
 
 rule grow_to_lumberjack {
-    B -[ 0.5 ]-> L
+    BL -[ 0.5 ]-> L
 }
 
 system init = T<trees>|L<lumberjacks>|C<farmers>;
