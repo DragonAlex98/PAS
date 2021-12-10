@@ -8,7 +8,6 @@ species D of [0, N];    /* death */
 species E of [0, N];    /* emigration */
 
 label pop = { P[i for i in [0, N]] }
-/*const min_pop = %P[0] < %P[1] && %P[0] < %P[2] ? 0 : (%P[1] < %P[0] && %P[1] < %P[2] ? 1 : 2);*/
 
 rule make_war_1 for i in [0, N] and j in [0, N] {
     [!(i == j)] P[i]|P[j] -[ warChance * (#P[i] / #pop) * (#P[j] / #pop) ]-> P[i]|D[j]
@@ -27,7 +26,7 @@ rule make_war_4 for i in [0, N] and j in [0, N] {
 }
 
 rule emigrate for i in [0, N] {
-    P[i] -[ #P[i]/#pop ]-> E[i]|P[(#P[0] < #P[1]) ? 1 : 0]|I[(i+1)%N]
+    P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
 }
 
 rule reproduce for i in [0, N] {
