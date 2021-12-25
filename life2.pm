@@ -25,9 +25,25 @@ rule make_war_4 for i in [0, N] and j in [0, N] {
     [!(i == j)] P[i]|P[j] -[ warChance * (#P[i] / #pop) * (#P[j] / #pop) ]-> P[i]|P[j]
 }
 
-rule emigrate for i in [0, N] {
+rule emigrate_to_next for i in [0, N] {
     P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
 }
+
+/*rule emigrate_to_biggest_1 for i in [0, N] {
+    [(#P[i] < #P[(i+1)%N]) && (#P[i] < #P[(i+2)%N]) && (#P[(i+1)%N] < #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+2)%N]|I[(i+2)%N]
+}
+
+rule emigrate_to_biggest_2 for i in [0, N] {
+    [(#P[i] < #P[(i+1)%N]) && (#P[i] < #P[(i+2)%N]) && (#P[(i+1)%N] > #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
+}*/
+
+/*rule emigrate_to_smallest_1 for i in [0, N] {
+    [(#P[i] > #P[(i+1)%N]) && (#P[i] > #P[(i+2)%N]) && (#P[(i+1)%N] > #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+2)%N]|I[(i+2)%N]
+}
+
+rule emigrate_to_smallest_2 for i in [0, N] {
+    [(#P[i] > #P[(i+1)%N]) && (#P[i] > #P[(i+2)%N]) && (#P[(i+1)%N] < #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
+}*/
 
 rule reproduce for i in [0, N] {
     P[i]<2> -[ #P[i]/#pop ]-> P[i]<3>|B[i]
