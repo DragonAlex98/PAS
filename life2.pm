@@ -49,6 +49,12 @@ rule reproduce for i in [0, N] {
     P[i]<2> -[ #P[i]/#pop ]-> P[i]<3>|B[i]
 }
 
+/*rule disaster for i in [0, N] {
+    [#P[i] > 100] P[i]<90> -[ 1.0 ]-> D[i]<90>
+}*/
+
+measure pop_tot = #pop;
+
 param scale = 10;
 system balanced = P[i for i in [0, N]]<scale>;
 system unbalanced = P[i for i in [0, N-1]]<scale>|P[N-1]<10*scale>;
