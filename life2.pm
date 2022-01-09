@@ -1,5 +1,7 @@
-const N = 3;            /* cities */
 const warChance = 1/4;
+
+param N = 3;            /* cities */
+param scale = 10;
 
 species P of [0, N];    /* people */
 species B of [0, N];    /* birth */
@@ -8,6 +10,10 @@ species D of [0, N];    /* death */
 species E of [0, N];    /* emigration */
 
 label pop = { P[i for i in [0, N]] }
+label birth = { B[i for i in [0, N]] }
+label immigration = { I[i for i in [0, N]] }
+label death = { D[i for i in [0, N]] }
+label emigration = { E[i for i in [0, N]] }
 
 rule make_war_1 for i in [0, N] and j in [0, N] {
     [!(i == j)] P[i]|P[j] -[ warChance * (#P[i] / #pop) * (#P[j] / #pop) ]-> P[i]|D[j]
@@ -49,12 +55,25 @@ rule reproduce for i in [0, N] {
     P[i]<2> -[ #P[i]/#pop ]-> P[i]<3>|B[i]
 }
 
-/*rule disaster for i in [0, N] {
-    [#P[i] > 100] P[i]<90> -[ 1.0 ]-> D[i]<90>
+/*rule reproduce_1 for i in [0, N] {
+    P[i]<2> -[ 0.5*#P[i]/#pop ]-> P[i]<3>|B[i]
+}
+
+rule reproduce_2 for i in [0, N] {
+    P[i]<2> -[ 0.5*#P[i]/#pop ]-> P[i]<4>|B[i]
 }*/
 
-measure pop_tot = #pop;
+/*rule disaster for i in [0, N] {
+    [#P[i] > 100] P[i]<90> -[ 0.05 ]-> D[i]<90>
+}*/
 
-param scale = 10;
+measure P_tot = #pop;
+measure B_tot = #birth;
+measure I_tot = #immigration;
+measure D_tot = #death;
+measure E_tot = #emigration;
+
+measure BIDE = #birth + #immigration - #death - #emigration;
+
 system balanced = P[i for i in [0, N]]<scale>;
 system unbalanced = P[i for i in [0, N-1]]<scale>|P[N-1]<10*scale>;
