@@ -34,7 +34,7 @@
             "patterns": [
                 {
                     "match": "(true|false)",
-                    "name": "constant.language.boolean.sibilla.pm"
+                    "name": "constant.language.boolean.sibilla.script"
                 },
                 {
                     "match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)",
@@ -59,16 +59,16 @@
                     "begin": "'",
                     "beginCaptures": {
                         "0": {
-                            "name": "punctuation.definition.string.begin.sibilla.pm"
+                            "name": "punctuation.definition.string.begin.sibilla.script"
                         }
                     },
                     "end": "'",
                     "endCaptures": {
                         "0": {
-                            "name": "punctuation.definition.string.end.sibilla.pm"
+                            "name": "punctuation.definition.string.end.sibilla.script"
                         }
                     },
-                    "name": "string.quoted.single.sibilla.pm"
+                    "name": "string.quoted.single.sibilla.script"
                 },
                 {
                     "begin": "(\")",
