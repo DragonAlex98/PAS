@@ -1,11 +1,18 @@
 module "population"
 load "example.pm"
+
+/* inline comment */
+
 set "text" "this-is-a-text";
 set "char" 'c';
 set "num" -1;
 set "float" -1.0f;
 set "bool" false;
 init "unbalanced"
+
+/* multiline
+comment */
+
 add all measures
 deadline 10000
 dt 1.0
