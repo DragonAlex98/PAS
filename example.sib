@@ -1,0 +1,14 @@
+module "population"
+load "example.pm"
+set "text" "this-is-a-text";
+set "char" 'c';
+set "num" -1;
+set "float" -1.0f;
+set "bool" false;
+init "unbalanced"
+add all measures
+deadline 10000
+dt 1.0
+replica 10
+simulate
+save output "./results" prefix "example" postfix ""
