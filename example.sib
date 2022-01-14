@@ -8,7 +8,7 @@ set "char" 'c';
 set "num" -1;
 set "float" -1.0f;
 set "bool" false;
-init "unbalanced"
+init "init"
 
 /* multiline
 comment */
