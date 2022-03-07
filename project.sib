@@ -1,0 +1,10 @@
+module "population"
+load "project.pm"
+set "scale" 10.0
+init "unbalanced"
+add all measures
+deadline 10000
+dt 1.0
+replica 10
+simulate
+save output "./results" prefix "project" postfix ""

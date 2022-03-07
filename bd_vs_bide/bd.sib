@@ -1,0 +1,10 @@
+module "population"
+load "bd.pm"
+set "scale" 10.0
+init "balanced"
+add all measures
+deadline 10000
+dt 1.0
+replica 100
+simulate
+save output "bd_vs_bide/bd_results" prefix "bd_" postfix ""

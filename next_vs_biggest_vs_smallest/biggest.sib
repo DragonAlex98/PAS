@@ -1,0 +1,10 @@
+module "population"
+load "biggest.pm"
+set "scale" 10.0
+init "balanced"
+add all measures
+deadline 10000
+dt 1.0
+replica 100
+simulate
+save output "next_vs_biggest_vs_smallest/biggest_results" prefix "biggest_" postfix ""

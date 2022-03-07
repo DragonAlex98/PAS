@@ -1,0 +1,42 @@
+{
+    "name": "sibilla",
+    "displayName": "%displayName%",
+    "description": "%description%",
+    "version": "1.0.0",
+    "publisher": "sibilla",
+    "license": "MIT",
+    "engines": {
+        "vscode": "*"
+    },
+    "scripts": {
+        "update-grammar": "node ./build/update-grammars.js"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "sibilla-pm",
+                "extensions": [
+                    ".pm"
+                ]
+            },
+            {
+                "id": "sibilla-script",
+                "extensions": [
+                    ".sib"
+                ]
+            }
+        ],
+        "grammars": [
+            {
+                "language": "sibilla-pm",
+                "scopeName": "source.sibilla.pm",
+                "path": "./syntaxes/sibilla-pm.tmLanguage.json"
+            },
+            {
+                "language": "sibilla-script",
+                "scopeName": "source.sibilla.script",
+                "path": "./syntaxes/sibilla-script.tmLanguage.json"
+            }
+        ]
+    }
+}

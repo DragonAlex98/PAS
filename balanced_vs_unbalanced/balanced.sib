@@ -1,0 +1,10 @@
+module "population"
+load "bide.pm"
+set "scale" 10.0
+init "balanced"
+add all measures
+deadline 10000
+dt 1.0
+replica 100
+simulate
+save output "balanced_vs_unbalanced/balanced_results" prefix "balanced_" postfix ""
