@@ -1,13 +1,13 @@
 const warChance = 1/4;
 
-param N = 3;            /* cities */
+param N = 3;
 param scale = 10;
 
-species P of [0, N];    /* people */
-species B of [0, N];    /* birth */
-species I of [0, N];    /* immigration */
-species D of [0, N];    /* death */
-species E of [0, N];    /* emigration */
+species P of [0, N];
+species B of [0, N];
+species I of [0, N];
+species D of [0, N];
+species E of [0, N];
 
 label pop = { P[i for i in [0, N]] }
 label birth = { B[i for i in [0, N]] }
@@ -35,33 +35,13 @@ rule emigrate_to_next for i in [0, N] {
     P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
 }
 
-/*rule emigrate_to_biggest_1 for i in [0, N] {
-    [(#P[i] < #P[(i+1)%N]) && (#P[i] < #P[(i+2)%N]) && (#P[(i+1)%N] < #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+2)%N]|I[(i+2)%N]
-}
-
-rule emigrate_to_biggest_2 for i in [0, N] {
-    [(#P[i] < #P[(i+1)%N]) && (#P[i] < #P[(i+2)%N]) && (#P[(i+1)%N] > #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
-}*/
-
-/*rule emigrate_to_smallest_1 for i in [0, N] {
-    [(#P[i] > #P[(i+1)%N]) && (#P[i] > #P[(i+2)%N]) && (#P[(i+1)%N] > #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+2)%N]|I[(i+2)%N]
-}
-
-rule emigrate_to_smallest_2 for i in [0, N] {
-    [(#P[i] > #P[(i+1)%N]) && (#P[i] > #P[(i+2)%N]) && (#P[(i+1)%N] < #P[(i+2)%N])] P[i] -[ #P[i]/#pop ]-> E[i]|P[(i+1)%N]|I[(i+1)%N]
-}*/
-
-rule reproduce for i in [0, N] {
-    P[i]<2> -[ #P[i]/#pop ]-> P[i]<3>|B[i]
-}
-
-/*rule reproduce_1 for i in [0, N] {
+rule reproduce_1 for i in [0, N] {
     P[i]<2> -[ 0.5*#P[i]/#pop ]-> P[i]<3>|B[i]
 }
 
 rule reproduce_2 for i in [0, N] {
     P[i]<2> -[ 0.5*#P[i]/#pop ]-> P[i]<4>|B[i]<2>
-}*/
+}
 
 measure P_tot = #pop;
 measure B_tot = #birth;

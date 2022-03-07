@@ -1,5 +1,5 @@
 module "population"
-load "project.pm"
+load "children.pm"
 set "scale" 10.0
 init "balanced"
 add all measures
@@ -7,4 +7,4 @@ deadline 10000
 dt 1.0
 replica 100
 simulate
-save output "./results" prefix "project" postfix ""
+save output "child_vs_children/children_results" prefix "children_" postfix ""
