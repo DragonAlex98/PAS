@@ -2,6 +2,9 @@
 
 BD and BIDE models for PAS exam @ University of Camerino.
 
+## Report
+The report about the project can be found [here](Performance_Analysis_and_Simulation.pdf).
+
 ## How to run
 - Clone the Sibilla repository at https://github.com/quasylab/sibilla
 - Navigate to the Sibilla folder and from the terminal run the following command:
