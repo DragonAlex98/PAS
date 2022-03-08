@@ -49,6 +49,7 @@ measure I_tot = #immigration;
 measure D_tot = #death;
 measure E_tot = #emigration;
 
+measure SINGLE_BIDE for i in [0, N] = #B[i] + #I[i] - #D[i] - #E[i];
 measure BIDE = #birth + #immigration - #death - #emigration;
 
 system balanced = P[i for i in [0, N]]<scale>;

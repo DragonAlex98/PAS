@@ -35,6 +35,7 @@ measure P_tot = #pop;
 measure B_tot = #birth;
 measure D_tot = #death;
 
+measure SINGLE_BD for i in [0, N] = #B[i] - #D[i];
 measure BD = #birth - #death;
 
 system balanced = P[i for i in [0, N]]<scale>;
